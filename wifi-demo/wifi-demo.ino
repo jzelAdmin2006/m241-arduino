@@ -29,17 +29,28 @@ void setup() {
   Serial.println("You're connected to the network");
 
   client.beginRequest();
-  client.get("/WeatherForecast"); // Path to resource
+  client.get("/WeatherForecast");
   client.endRequest();
   
   // Read the status code and body of the response
-  int statusCode = client.responseStatusCode();
-  String response = client.responseBody();
+  int getStatusCode = client.responseStatusCode();
+  String getResponse = client.responseBody();
   
-  Serial.print("Status code: ");
-  Serial.println(statusCode);
-  Serial.print("Response: ");
-  Serial.println(response);
+  Serial.print("Status code for GET request: ");
+  Serial.println(getStatusCode);
+  Serial.print("Response for GET request: ");
+  Serial.println(getResponse);
+  
+  client.beginRequest();
+  client.post("/api/Rooms", "application/json", "{\"id\": 0, \"name\": \"string\", \"humidity\": 0, \"client\": {\"id\": 0, \"name\": \"string\"}, \"clientId\": 0}");
+  int postStatusCode = client.responseStatusCode();
+  String postResponse = client.responseBody();
+  client.endRequest();
+
+  Serial.print("Status code for POST request: ");
+  Serial.println(postStatusCode);
+  Serial.print("Response for POST request: ");
+  Serial.println(postResponse);
 }
 
 void loop() {
