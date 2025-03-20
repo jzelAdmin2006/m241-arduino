@@ -7,8 +7,8 @@ char ssid[] = SECRET_SSID;                // your network SSID (name)
 char pass[] = SECRET_PASS;                // your network password
 int status = WL_IDLE_STATUS;
 
-WiFiSSLClient sslClient; // Create a WiFiSSLClient object for secure connections
-HttpClient client = HttpClient(sslClient, "m241.jzel.ch", 443); // HTTPS port is 443
+WiFiClient wifiClient;
+HttpClient client = HttpClient(wifiClient, "172.18.13.20", 8090);
 
 void setup() {
   Serial.begin(9600);
