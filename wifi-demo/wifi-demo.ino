@@ -8,7 +8,7 @@ char pass[] = SECRET_PASS;                // your network password
 int status = WL_IDLE_STATUS;
 
 WiFiClient wifiClient;
-HttpClient client = HttpClient(wifiClient, "172.18.13.20", 8090);
+HttpClient client = HttpClient(wifiClient, "172.18.13.20", 8080);
 
 void setup() {
   Serial.begin(9600);
@@ -31,7 +31,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   client.beginRequest();
-  client.get("/WeatherForecast");
+  client.get("/api/Rooms");
   client.endRequest();
   
   // Read the status code and body of the response
