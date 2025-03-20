@@ -27,6 +27,8 @@ void setup() {
   }
   
   Serial.println("You're connected to the network");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());
 
   client.beginRequest();
   client.get("/WeatherForecast");
