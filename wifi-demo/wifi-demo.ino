@@ -29,8 +29,7 @@ void setup() {
   Serial.println("You're connected to the network");
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
-  byte mac[6];
-  WiFi.macAddress(mac);
+  
   Serial.print("MAC Address: ");
   Serial.println(getMacAddress());
 
