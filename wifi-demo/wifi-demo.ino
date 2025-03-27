@@ -8,7 +8,7 @@ char pass[] = SECRET_PASS;                // your network password
 int status = WL_IDLE_STATUS;
 
 WiFiClient wifiClient;
-HttpClient client = HttpClient(wifiClient, "172.18.13.20", 8080);
+HttpClient client = HttpClient(wifiClient, "192.168.168.222", 8080);
 
 void setup() {
   Serial.begin(9600);
@@ -29,6 +29,10 @@ void setup() {
   Serial.println("You're connected to the network");
   Serial.print("IP Address: ");
   Serial.println(WiFi.localIP());
+  byte mac[6];
+  WiFi.macAddress(mac);
+  Serial.print("MAC Address: ");
+  Serial.println(getMacAddress());
 
   client.beginRequest();
   client.get("/api/Rooms");
@@ -57,4 +61,21 @@ void setup() {
 
 void loop() {
   // nichts zu tun hier
+}
+
+String getMacAddress() {
+  byte mac[6];
+  WiFi.macAddress(mac);
+  String macStr = "";
+
+  for (int i = 0; i < 6; i++) {
+    if (mac[i] < 16) {
+      macStr += "0";
+    }
+    macStr += String(mac[i], HEX);
+    if (i < 5) macStr += ":";
+  }
+
+  macStr.toUpperCase();
+  return macStr;
 }
